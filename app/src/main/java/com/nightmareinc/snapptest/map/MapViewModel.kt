@@ -42,9 +42,10 @@ class MapViewModel (var vehiclesRepository: VehiclesRepository) : ViewModel() {
                 _status.value = Status.LOADING
                 _vehicles.value = vehicleList
                 _status.value = Status.DONE
-                Log.i("nzn", "fetch all vehicles >> ${_vehicles?.value}")
+                Log.d("nzn", "fetch all vehicles >> ${_vehicles?.value}")
             } catch (e: Exception){
                 _status.value = Status.ERROR
+                Log.d("nzn", "error >> ${_status?.value} >>> ${e.message}")
                 e.printStackTrace()
             }
         }

@@ -1,13 +1,14 @@
 package com.nightmareinc.snapptest.model.api
 
-import retrofit2.http.GET
-import retrofit2.Response
-
+import com.google.gson.GsonBuilder
 import com.nightmareinc.snapptest.listener.Constant
 import com.nightmareinc.snapptest.model.models.VehicleList
 import okhttp3.OkHttpClient
+import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
+import retrofit2.http.GET
+
 
 interface VehicleAPI {
 
@@ -16,6 +17,8 @@ interface VehicleAPI {
             networkConnectionInterceptor: NetworkConnectionInterceptor
         ): VehicleAPI {
 
+            val gson = GsonBuilder().setLenient().create()
+
             val okHttpClient = OkHttpClient.Builder()
                 .addInterceptor(networkConnectionInterceptor)
                 .build()
@@ -23,7 +26,7 @@ interface VehicleAPI {
             return Retrofit.Builder()
                 .client(okHttpClient)
                 .baseUrl(Constant.BASE_URL)
-                .addConverterFactory(GsonConverterFactory.create())
+                .addConverterFactory(GsonConverterFactory.create(gson))
                 .build()
                 .create(VehicleAPI::class.java)
 

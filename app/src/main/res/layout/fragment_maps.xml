@@ -9,11 +9,10 @@
             type="com.nightmareinc.snapptest.map.MapViewModel" />
     </data>
 
-    <fragment
+    <com.google.android.gms.maps.MapView
         android:id="@+id/map"
-        android:name="com.google.android.gms.maps.SupportMapFragment"
+        android:name="com.google.android.gms.maps.MapFragment"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        tools:context=".map.MapsFragment" />
+        android:layout_height="match_parent" />
 
 </layout>
