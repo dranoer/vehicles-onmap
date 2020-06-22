@@ -59,28 +59,23 @@ class MapsFragment : Fragment() {
         binding.mapViewModel = mapViewModel
         binding.lifecycleOwner = this
 
-        binding.map.getMapAsync(callback)
-        // Needs to call MapsInitializer before doing any CameraUpdateFactory calls
-        try {
-            MapsInitializer.initialize(this.activity)
-        } catch (e: Exception) {
-            e.printStackTrace()
-        }
+        binding.map.postDelayed({
+            binding.map.onCreate(Bundle())
+            binding.map.getMapAsync {
+//                onMapReady(it)
+//                binding.map.getMapAsync(callback)
+            }
+        }, 500)
 
         return binding.root
     }
 
-    /*override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-
-        binding.map?.getMapAsync(callback)
-
-//        val mapFragment = childFragmentManager.findFragmentById(R.id.map) as SupportMapFragment?
-//        mapFragment?.getMapAsync(callback)
-    }*/
-
     override fun onResume() {
-        binding.map.onResume()
+        binding.map.postDelayed({
+            binding.map.onResume()
+        }, 3000)
+
+
         super.onResume()
     }
 
