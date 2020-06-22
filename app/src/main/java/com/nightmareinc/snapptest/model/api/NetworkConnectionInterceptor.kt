@@ -11,10 +11,10 @@ import okhttp3.Response
 import com.nightmareinc.snapptest.util.NoInternetException
 
 class NetworkConnectionInterceptor(
-    context: Context
+    context: Context?
 ) : Interceptor {
 
-    private val applicationContext = context.applicationContext
+    private val applicationContext = context?.applicationContext
 
     @RequiresApi(Build.VERSION_CODES.M)
     override fun intercept(chain: Interceptor.Chain): Response {
@@ -27,7 +27,7 @@ class NetworkConnectionInterceptor(
     private fun isInternetAvailable(): Boolean {
         var result = false
         val connectivityManager =
-            applicationContext.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager?
+            applicationContext?.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager?
         connectivityManager?.let {
             it.getNetworkCapabilities(connectivityManager.activeNetwork)?.apply {
                 result = when {

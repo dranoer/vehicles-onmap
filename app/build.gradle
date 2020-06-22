@@ -1,6 +1,8 @@
 apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
+apply plugin: 'androidx.navigation.safeargs'
+apply plugin: 'kotlin-kapt'
 
 android {
     compileSdkVersion 29
@@ -21,6 +23,10 @@ android {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
+    }
+
+    dataBinding {
+        enabled = true
     }
 }
 
@@ -48,13 +54,10 @@ dependencies {
     implementation "com.squareup.retrofit2:converter-gson:$version_retrofit"
 
     // ViewModel and LiveData
-//    implementation "androidx.lifecycle:$version_lifecycle_extensions"
+    implementation "androidx.lifecycle:lifecycle-extensions:$version_lifecycle_extensions"
 
     // Kotlin Coroutines
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:$version_coroutine"
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:$version_coroutine"
 
-    // Kodein Dependency Injection
-    implementation "org.kodein.di:kodein-di-generic-jvm:$version_kodein"
-    implementation "org.kodein.di:kodein-di-framework-android-x:$version_kodein"
 }
